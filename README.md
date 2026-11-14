@@ -34,11 +34,12 @@ ignores:
 Try changes here before pushing:
 
 ```bash
-python3 build.py --serve
+./preview-locally.command      # or double-click it in Finder
 ```
 
-Then open <http://localhost:8000/>. After editing anything, stop it with Ctrl-C
-and run it again. If something is wrong with a file, the build says which one.
+It builds the site, opens <http://localhost:47213/> in Firefox, and serves until
+you close the window or press Ctrl-C (underneath, it's `python3 build.py
+--serve`). After editing anything, stop it and run it again. If something is wrong with a file, the build says which one.
 
 ## Add a talk
 
@@ -60,7 +61,10 @@ and run it again. If something is wrong with a file, the build says which one.
    `slides/8/beth.pdf`. Until the PDF is there, the page shows without the
    slides and download link.
 
-3. For a new evening, also add it to the top of `_data/evenings.yml`.
+3. For a new evening, also add it to the top of `_data/evenings.yml`. Before
+   the evening, give it a `day`, like `day: Tuesday 17 November`, and its
+   talks that have no PDF yet say the slides will be here on that day. Take
+   `day` out afterwards.
 
 4. Test it, then push.
 

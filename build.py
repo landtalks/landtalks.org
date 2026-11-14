@@ -2,7 +2,7 @@
 """Build landtalks.org into _site/. Standard library only.
 
     python3 build.py           build
-    python3 build.py --serve   build, then preview at http://localhost:8000/
+    python3 build.py --serve   build, then preview at http://localhost:47213/
 
 Talks are _talks/<evening>/<name>.md, slides are slides/<evening>/<name>.pdf,
 and evenings are in _data/evenings.yml. See README.md.
@@ -23,8 +23,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "_site"
-NOT_PUBLISHED = {"README.md", "build.py", "trim_emoji.js", "tmp", "__pycache__"}
+NOT_PUBLISHED = {"README.md", "build.py", "trim_emoji.js", "preview-locally.command", "tmp", "__pycache__"}
 TALK_FIELDS = ("title", "speaker", "emoji", "hook")
+PORT = 47213  # high and arbitrary, so it never meets another local server
 
 
 def fail(message):
@@ -187,7 +188,9 @@ def parse(tokens, position=0, until=None):
             word = tag.split()[0]
             if word == until:
                 return nodes, position
-            if word in ("if", "for"):
+            if word == "else" and until == "endif":
+                nodes.append(("else", "", None))
+            elif word in ("if", "for"):
                 children, position = parse(tokens, position + 1, "end" + word)
                 nodes.append((word, tag[len(word) + 1:], children))
             elif word in ("assign", "include"):
@@ -213,8 +216,9 @@ def run(nodes, context):
             output = evaluate(text, context)
             result.append("" if output is None else str(output))
         elif kind == "if":
-            if condition(text, context):
-                result.append(run(children, context))
+            split = next((i for i, node in enumerate(children) if node[0] == "else"), len(children))
+            branch = children[:split] if condition(text, context) else children[split + 1:]
+            result.append(run(branch, context))
         elif kind == "for":
             name, _, items = text.partition(" in ")
             for item in evaluate(items, context) or []:
@@ -295,8 +299,8 @@ if __name__ == "__main__":
     build()
     if "--serve" in sys.argv:
         handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(OUT))
-        print("Preview at http://localhost:8000/ (Ctrl-C to stop). Run this again after editing.")
+        print(f"Preview at http://localhost:{PORT}/ (Ctrl-C to stop). Run this again after editing.")
         try:
-            http.server.ThreadingHTTPServer(("127.0.0.1", 8000), handler).serve_forever()
+            http.server.ThreadingHTTPServer(("127.0.0.1", PORT), handler).serve_forever()
         except KeyboardInterrupt:
             pass

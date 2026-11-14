@@ -14,7 +14,7 @@ layout: default
     <div>
       <p class="hook">{{ page.hook | escape }}</p>
       <div class="copy">{{ content }}</div>
-      {% if found %}<div class="actions"><a class="btn" href="{{ pdf }}">Download slides (PDF)</a></div>{% endif %}
+      {% if found %}<div class="actions"><a class="btn" href="{{ pdf }}">Download slides (PDF)</a></div>{% else %}{% if evening.day %}<p class="actions slides-soon">The slides will be here on the day, {{ evening.day }}.</p>{% endif %}{% endif %}
       {% if page.bio or page.photo or page.action_url %}
       <aside class="speaker">
         {% if page.photo %}<img class="speaker__photo" src="/images/speakers/{{ page.photo }}" width="88" height="88" alt="">{% endif %}

@@ -646,6 +646,7 @@ p:last-child { margin-bottom: 0; }
 }
 .copy { margin-top: 1rem; max-width: var(--measure); }
 .actions { margin-top: 1.75rem; }
+.slides-soon { color: var(--ink-soft); font-style: italic; }
 .speaker {
   display: flex;
   gap: 1.25rem;
