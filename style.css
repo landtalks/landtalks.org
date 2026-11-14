@@ -686,7 +686,8 @@ p:last-child { margin-bottom: 0; }
 .flip__status[hidden] { display: none; }
 
 /* Before an evening: an empty frame where the slides will go, the size they
-   will be, with when they arrive and a countdown to the talks. */
+   will be, with when they arrive and a countdown to the talks. Permanent:
+   switched on per evening in _data/evenings.yml, so keep it. */
 .soon { padding-block: 0 var(--bay); }
 .soon__frame {
   aspect-ratio: 16 / 9;

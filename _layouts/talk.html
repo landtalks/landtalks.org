@@ -37,6 +37,9 @@ layout: default
   </div>
   <script type="module" src="/assets/flip.js"></script>
   {% else %}{% if evening.starts %}
+  <!-- Before an evening: a countdown frame where the slides will go. Permanent:
+       an evening's `day` and `starts` in _data/evenings.yml switch it on and
+       off, so keep this when an evening is over. See README.md. -->
   <div class="soon">
     <div class="wrap">
       <div class="soon__frame" id="soon" data-starts="{{ evening.starts }}">

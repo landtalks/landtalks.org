@@ -2,7 +2,8 @@
 # "day" and "starts" are for an evening still to come: where a talk's slides
 # would be, it counts down to "starts" and says the slides will be up that day.
 # "starts" is in UTC (Z), which is London's time in winter; in summer (BST)
-# take an hour off, so 18:30 is 17:30Z. Remove both once the slides are in.
+# take an hour off, so 18:30 is 17:30Z. Once the slides are in, remove these
+# two lines; the countdown's code stays for the next evening. See README.md.
 - number: 8
   when: Nov 2026
   url: https://lu.ma/0xftehgg

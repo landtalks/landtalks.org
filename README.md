@@ -58,15 +58,10 @@ you close the window or press Ctrl-C (underneath, it's `python3 build.py
    ```
 
 2. Put the slides at `slides/<evening>/<name>.pdf`, for example
-   `slides/8/beth.pdf`. Until the PDF is there, the page shows without the
-   slides and download link.
+   `slides/8/beth.pdf`. Until the PDF is there, the page has no slides or
+   download link (or a countdown, before the evening: see below).
 
-3. For a new evening, also add it to the top of `_data/evenings.yml`. Before
-   the evening, give it a `day` and a `starts`, like `day: Tuesday 17
-   November` and `starts: 2026-11-17T18:30:00Z` (UTC, so an hour earlier in
-   British Summer Time). Talks with no PDF yet then show a countdown to the
-   start where the slides would be, saying the slides will be here on that
-   day. Take both out afterwards.
+3. For a new evening, also add it to the top of `_data/evenings.yml`.
 
 4. Test it, then push.
 
@@ -77,6 +72,59 @@ filename.
 
 Optional fields: `bio`, `photo` (a file in `images/speakers/`), `action_text`
 and `action_url`.
+
+## A new evening, before and after
+
+The talks can go up before the evening, as soon as they're on Luma, without
+their slides. Where the slides will go, each talk page then shows a dashed
+frame saying *"The slides will be here after the talk on Tuesday 17
+November."*, a countdown to the start, and a "See the talk yourself" link to
+the evening's Luma page.
+
+**Before the evening:**
+
+1. Add the evening to the top of `_data/evenings.yml` with two extra fields:
+
+   ```yaml
+   - number: 8
+     when: Nov 2026
+     url: https://lu.ma/0xftehgg
+     day: Tuesday 17 November
+     starts: 2026-11-17T18:30:00Z
+   ```
+
+   `day` is the date as the page writes it. `starts` is when the talks begin,
+   in UTC (the `Z`): the same as London time in winter, but an hour earlier
+   in British Summer Time, so a summer 6.30pm is `17:30:00Z`. `url` is the
+   Luma page, which is where "See the talk yourself" goes.
+
+2. Add a file in `_talks/<evening>/` for each talk, from the Luma copy (see
+   "Add a talk" above), with no PDFs.
+
+3. Test it and push.
+
+**On the day:** at the start time the countdown and the link go, and the frame
+says *"The talks are on now. The slides will be here afterwards."* The site is
+only rebuilt when you push, so it keeps saying that, even days later, until
+the slides are added. Add them soon after the evening.
+
+**After the evening:**
+
+1. Put each speaker's final PDF at `slides/<evening>/<name>.pdf`. Each talk
+   whose PDF is there shows the slide viewer and download link instead of the
+   frame.
+2. Take `day` and `starts` out of the evening in `_data/evenings.yml`. With
+   them gone, a talk that never gets slides just has no frame, rather than
+   saying the talks are on now.
+3. Test it and push.
+
+The build's last line, "No PDF yet for: ...", lists the talks still waiting
+for slides.
+
+The countdown is a permanent part of the site, used for every evening. It is
+turned on and off only by `day` and `starts` in `_data/evenings.yml`. Never
+delete its code, in `_layouts/talk.html` (the `soon` block and its script)
+and `style.css` (the `.soon` rules), when an evening is over.
 
 ## Emoji
 
