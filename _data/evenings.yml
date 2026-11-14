@@ -1,10 +1,13 @@
 # Newest first. Add a new evening at the top.
-# "day" is for an evening still to come: its talks without slides say the
-# slides will be up on that day. Remove it once the slides are in.
+# "day" and "starts" are for an evening still to come: where a talk's slides
+# would be, it counts down to "starts" and says the slides will be up that day.
+# "starts" is in UTC (Z), which is London's time in winter; in summer (BST)
+# take an hour off, so 18:30 is 17:30Z. Remove both once the slides are in.
 - number: 8
   when: Nov 2026
   url: https://lu.ma/0xftehgg
   day: Tuesday 17 November
+  starts: 2026-11-17T18:30:00Z
 - number: 7
   when: Sep 2026
   url: https://lu.ma/mka0gu7s

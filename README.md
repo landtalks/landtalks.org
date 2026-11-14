@@ -62,9 +62,11 @@ you close the window or press Ctrl-C (underneath, it's `python3 build.py
    slides and download link.
 
 3. For a new evening, also add it to the top of `_data/evenings.yml`. Before
-   the evening, give it a `day`, like `day: Tuesday 17 November`, and its
-   talks that have no PDF yet say the slides will be here on that day. Take
-   `day` out afterwards.
+   the evening, give it a `day` and a `starts`, like `day: Tuesday 17
+   November` and `starts: 2026-11-17T18:30:00Z` (UTC, so an hour earlier in
+   British Summer Time). Talks with no PDF yet then show a countdown to the
+   start where the slides would be, saying the slides will be here on that
+   day. Take both out afterwards.
 
 4. Test it, then push.
 

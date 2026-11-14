@@ -14,7 +14,7 @@ layout: default
     <div>
       <p class="hook">{{ page.hook | escape }}</p>
       <div class="copy">{{ content }}</div>
-      {% if found %}<div class="actions"><a class="btn" href="{{ pdf }}">Download slides (PDF)</a></div>{% else %}{% if evening.day %}<p class="actions slides-soon">The slides will be here on the day, {{ evening.day }}.</p>{% endif %}{% endif %}
+      {% if found %}<div class="actions"><a class="btn" href="{{ pdf }}">Download slides (PDF)</a></div>{% endif %}
       {% if page.bio or page.photo or page.action_url %}
       <aside class="speaker">
         {% if page.photo %}<img class="speaker__photo" src="/images/speakers/{{ page.photo }}" width="88" height="88" alt="">{% endif %}
@@ -36,5 +36,40 @@ layout: default
     </div>
   </div>
   <script type="module" src="/assets/flip.js"></script>
-  {% endif %}
+  {% else %}{% if evening.starts %}
+  <div class="soon">
+    <div class="wrap">
+      <div class="soon__frame" id="soon" data-starts="{{ evening.starts }}">
+        <p class="soon__line">The slides will be here after the talk on {{ evening.day }}.</p>
+        <p class="soon__left" hidden></p>
+        <p class="soon__tickets"><a href="{{ evening.url }}">See the talk yourself</a></p>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Count down to the evening's start. Without JavaScript the date alone shows.
+    (function () {
+      var box = document.getElementById('soon');
+      var starts = Date.parse(box.dataset.starts);
+      var left = box.querySelector('.soon__left');
+      if (isNaN(starts)) return;
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+      function tick() {
+        var s = Math.floor((starts - Date.now()) / 1000);
+        if (s <= 0) {
+          left.hidden = true;
+          box.querySelector('.soon__tickets').hidden = true;
+          box.querySelector('.soon__line').textContent = 'The talks are on now. The slides will be here afterwards.';
+          return;
+        }
+        var d = Math.floor(s / 86400);
+        left.textContent = (d ? d + 'd ' : '') + pad(Math.floor(s / 3600) % 24) + 'h ' +
+          pad(Math.floor(s / 60) % 60) + 'm ' + pad(s % 60) + 's to go';
+        left.hidden = false;
+        setTimeout(tick, 1000 - (Date.now() % 1000));
+      }
+      tick();
+    })();
+  </script>
+  {% endif %}{% endif %}
 </main>

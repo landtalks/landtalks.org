@@ -646,7 +646,6 @@ p:last-child { margin-bottom: 0; }
 }
 .copy { margin-top: 1rem; max-width: var(--measure); }
 .actions { margin-top: 1.75rem; }
-.slides-soon { color: var(--ink-soft); font-style: italic; }
 .speaker {
   display: flex;
   gap: 1.25rem;
@@ -685,6 +684,41 @@ p:last-child { margin-bottom: 0; }
   font-size: 0.8125rem;
 }
 .flip__status[hidden] { display: none; }
+
+/* Before an evening: an empty frame where the slides will go, the size they
+   will be, with when they arrive and a countdown to the talks. */
+.soon { padding-block: 0 var(--bay); }
+.soon__frame {
+  aspect-ratio: 16 / 9;
+  max-width: calc((100svh - 9rem) * 16 / 9);
+  border: 1px dashed rgba(20, 41, 12, 0.35);
+  background: var(--paper-sunk);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+}
+.soon__frame p { margin: 0; }
+.soon__line {
+  font-style: italic;
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+  color: var(--ink-soft);
+  max-width: 30ch;
+  text-wrap: balance;
+}
+.soon__left {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: var(--bronze-deep);
+  font-variant-numeric: tabular-nums;
+}
+.soon__tickets { font-size: 0.9375rem; }
+.soon__tickets a { color: var(--ink-soft); }
+.soon__tickets a:hover { color: var(--ink); }
 .flip__controls {
   display: flex;
   align-items: center;
