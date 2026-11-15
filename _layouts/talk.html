@@ -14,7 +14,7 @@ layout: default
     <div>
       <p class="hook">{{ page.hook | escape }}</p>
       <div class="copy">{{ content }}</div>
-      {% if found %}<div class="actions"><a class="btn" href="{{ pdf }}">Download slides (PDF)</a></div>{% endif %}
+      {% if found or page.action %}<div class="actions">{% if found %}<a class="btn" href="{{ pdf }}">Download slides (PDF)</a>{% endif %}{% if page.action %}<a class="btn btn--quiet" href="#take-action">Take action &darr;</a>{% endif %}</div>{% endif %}
       {% if page.bio or page.photo %}
       <aside class="speaker">
         {% if page.photo %}<img class="speaker__photo" src="/images/speakers/{{ page.photo }}" width="88" height="88" alt="">{% endif %}
@@ -25,21 +25,6 @@ layout: default
       {% endif %}
     </div>
   </div>
-  {% if page.action %}
-  <!-- Take action: one thing to do after the talk, set by the action fields
-       in the talk's own file in _talks/. See README.md. -->
-  <div class="wrap take-action-row">
-    <a class="take-action" href="{{ page.action_url }}">
-      {% if page.action_image %}<img class="take-action__pic" src="/images/actions/{{ page.action_image }}" alt="">{% endif %}
-      <span class="take-action__text">
-        <span class="eyebrow">Take action</span>
-        <span class="take-action__do">{{ page.action | escape }}</span>
-        {% if page.action_text %}<span class="take-action__why">{{ page.action_text | escape }}</span>{% endif %}
-        <span class="btn">{{ page.action_button | default: "Find out more" | escape }} &rarr;</span>
-      </span>
-    </a>
-  </div>
-  {% endif %}
   {% if found %}
   <div class="flip">
     <div class="wrap">
@@ -91,4 +76,20 @@ layout: default
     })();
   </script>
   {% endif %}{% endif %}
+  {% if page.action %}
+  <!-- Take action: one thing to do after the talk, set by the action fields
+       in the talk's own file in _talks/. After the slides, with a button at the
+       top of the page that jumps here. See README.md. -->
+  <div class="wrap take-action-row" id="take-action">
+    <a class="take-action" href="{{ page.action_url }}">
+      {% if page.action_image %}<img class="take-action__pic" src="/images/actions/{{ page.action_image }}" alt="">{% endif %}
+      <span class="take-action__text">
+        <span class="eyebrow">Take action</span>
+        <span class="take-action__do">{{ page.action | escape }}</span>
+        {% if page.action_text %}<span class="take-action__why">{{ page.action_text | escape }}</span>{% endif %}
+        <span class="btn">{{ page.action_button | default: "Find out more" | escape }} &rarr;</span>
+      </span>
+    </a>
+  </div>
+  {% endif %}
 </main>

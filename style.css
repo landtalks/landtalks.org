@@ -651,7 +651,7 @@ p:last-child { margin-bottom: 0; }
   max-width: var(--measure);
 }
 .copy { margin-top: 1rem; max-width: var(--measure); }
-.actions { margin-top: 1.75rem; }
+.actions { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .speaker {
   display: flex;
   gap: 1.25rem;
@@ -667,7 +667,9 @@ p:last-child { margin-bottom: 0; }
 /* Take action: one thing to do after the talk, from the action fields in
    the talk's file. A wide row under the talk's text: the picture of where
    it goes, tilted like a print, then what to do. The whole row is the link. */
-.take-action-row { padding-bottom: 2.5rem; }
+.take-action-row { padding-bottom: var(--bay); scroll-margin-top: 6rem; }
+.soon + script + .take-action-row { margin-top: calc(-1 * var(--bay) + 2.5rem); }
+.flip + script + .take-action-row { margin-top: calc(-1 * var(--bay) + 2.5rem); }
 .take-action {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -737,15 +739,16 @@ p:last-child { margin-bottom: 0; }
 }
 .flip__status[hidden] { display: none; }
 
-/* Before an evening: an empty frame where the slides will go, the size they
-   will be, with when they arrive and a countdown to the talks. Permanent:
+/* Before an evening: an empty frame where the slides will go, on the same
+   dark band as the slide viewer and the size the slides will be, with when they arrive and a countdown to the talks. Permanent:
    switched on per evening in _data/evenings.yml, so keep it. */
-.soon { padding-block: 0 var(--bay); }
+.soon { background: var(--ink); padding-block: 2rem; margin-bottom: var(--bay); }
+.soon .slides-label { color: var(--glow); }
 .soon__frame {
   aspect-ratio: 16 / 9;
   max-width: calc((100svh - 9rem) * 16 / 9);
-  border: 1px dashed rgba(20, 41, 12, 0.35);
-  background: var(--paper-sunk);
+  border: 1px dashed rgba(245, 185, 68, 0.4);
+  background: #0d1a07;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -758,7 +761,7 @@ p:last-child { margin-bottom: 0; }
 .soon__line {
   font-style: italic;
   font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
-  color: var(--ink-soft);
+  color: #fff8ea;
   max-width: 30ch;
   text-wrap: balance;
 }
@@ -766,12 +769,12 @@ p:last-child { margin-bottom: 0; }
   font-family: var(--mono);
   font-size: 0.8125rem;
   letter-spacing: 0.06em;
-  color: var(--bronze-deep);
+  color: var(--glow);
   font-variant-numeric: tabular-nums;
 }
 .soon__tickets { font-size: 0.9375rem; }
-.soon__tickets a { color: var(--ink-soft); }
-.soon__tickets a:hover { color: var(--ink); }
+.soon__tickets a { color: rgba(255, 248, 234, 0.8); }
+.soon__tickets a:hover { color: var(--glow); }
 .flip__controls {
   display: flex;
   align-items: center;
