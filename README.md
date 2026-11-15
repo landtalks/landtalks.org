@@ -67,10 +67,11 @@ you close the window or press Ctrl-C (underneath, it's `python3 build.py
 
 That one file feeds the talk's page at `/talks/8/beth/`, the home page's random
 cards and the Talks page. The filename sets the web address, so don't rename a
-talk once it's live. Talks within an evening are listed alphabetically by
-filename.
+talk once it's live. Talks within an evening are listed in running order,
+from an `order` field (`order: 1` for the first talk, and so on), or
+alphabetically by filename for evenings without one.
 
-Optional fields: `bio`, `photo` (a file in `images/speakers/`), `action_text`
+Optional fields: `order`, `bio`, `photo` (a file in `images/speakers/`), `action_text`
 and `action_url`.
 
 ## A new evening, before and after

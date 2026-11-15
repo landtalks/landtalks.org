@@ -2,6 +2,7 @@
 title: "One Pile, Several Families: The Co-house One Family Couldn't Create"
 speaker: "Ira Bolychevsky"
 evening: 8
+order: 1
 emoji: 🏰
 hook: "Ira and her partner had a London rental, a baby due and a Rightmove habit for country piles."
 ---

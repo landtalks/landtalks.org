@@ -2,6 +2,7 @@
 title: "Murder & Missing Data: Opening Up the Planning Crime Files"
 speaker: "Ewa Moskwiak"
 evening: 8
+order: 2
 emoji: 🕵️
 hook: "Britain's most talked-about crime of 2023 took one night, had no human victim and put two men in prison for four years."
 ---

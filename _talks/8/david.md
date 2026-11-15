@@ -2,6 +2,7 @@
 title: "Private Finance: The Rule the Treasury Seems to Forget"
 speaker: "David Rosof-Williams"
 evening: 8
+order: 5
 emoji: 🎩
 hook: "The canals, the Piccadilly line and the Blair-era PFI hospitals Britain will pay for three times over: all national infrastructure built with private money."
 ---

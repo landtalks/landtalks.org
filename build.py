@@ -122,6 +122,9 @@ def talks(known):
             fail(f"{name}: add evening {folder} to _data/evenings.yml")
         fields["emoji_src"] = emoji_image(str(fields["emoji"]), name)
         found.append({**fields, "slug": path.stem, "url": f"/talks/{folder}/{path.stem}/", "content": markdown(body)})
+    # Within an evening, by `order` (the running order) where talks have one,
+    # then by filename. Sorting is stable, so evenings stay as they were.
+    found.sort(key=lambda talk: (talk["evening"], talk.get("order", 999), talk["slug"]))
     return found
 
 

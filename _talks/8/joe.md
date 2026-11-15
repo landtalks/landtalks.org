@@ -2,6 +2,7 @@
 title: "Ground Truth: What's the Land Under Your House Worth?"
 speaker: "Joe Davis"
 evening: 8
+order: 6
 emoji: 🧮
 hook: "Joe's built a calculator that prices the land under every house in England and Wales."
 ---

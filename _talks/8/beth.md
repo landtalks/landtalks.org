@@ -2,6 +2,7 @@
 title: "Cap & Buy Back: How Rent Control Could Pay for Social Housing"
 speaker: "Beth Stratford"
 evening: 8
+order: 4
 emoji: 🧢
 hook: "Every economist knows where rent control leads: Stockholm, with its decade-long queues to get a home."
 ---

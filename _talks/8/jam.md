@@ -1,7 +1,8 @@
 ---
 title: "Housing Hacks: Diagnosing London's Housing Crisis One Saturday At A Time"
-speaker: 'Jamie "Jam" Coombes'
+speaker: "Jam Coombes"
 evening: 8
+order: 3
 emoji: 🧑‍💻
 hook: "A Section 21 notice turned Jam's interest in housing personal."
 ---
