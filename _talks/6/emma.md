@@ -4,6 +4,11 @@ speaker: "Emma Kernahan"
 evening: 6
 emoji: 🌄
 hook: "People walked, foraged and picnicked in Stroud's Heavens Valley for generations — but only at a private landowner's discretion."
+action: "Own a share of Heavens Valley"
+action_text: "A £50 share in the Heavens Valley Community Benefit Society makes you a co-owner of the valley, with an equal say in how it is looked after."
+action_button: "Become a shareholder"
+action_url: https://www.heavensvalley.org.uk/donate
+action_image: "6-emma.jpg"
 ---
 
 When the land came up for sale, a pub meeting became a campaign, and the campaign raised a record £850,000 to buy all 102 acres. Emma shares what happened when permission became ownership and the flourishing of community campaigns Stroud has since inspired.

@@ -121,6 +121,10 @@ def talks(known):
             fail(f"{name}: it says evening {fields.get('evening')} but is in folder {folder}")
         if fields["evening"] not in known:
             fail(f"{name}: add evening {folder} to _data/evenings.yml")
+        if "action" in fields and "action_url" not in fields:
+            fail(f"{name}: it has an action but no action_url for it to link to")
+        if "action_image" in fields and not (ROOT / "images/actions" / str(fields["action_image"])).is_file():
+            fail(f"{name}: action_image {fields['action_image']} isn't in images/actions/")
         fields["emoji_src"] = emoji_image(str(fields["emoji"]), name)
         found.append({**fields, "slug": path.stem, "url": f"/talks/{folder}/{path.stem}/", "content": markdown(body)})
     # Within an evening, by `order` (the running order) where talks have one,

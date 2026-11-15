@@ -663,12 +663,58 @@ p:last-child { margin-bottom: 0; }
 }
 .speaker__photo { flex: none; width: 5.5rem; height: 5.5rem; border-radius: 50%; object-fit: cover; }
 .speaker p { font-size: 0.9375rem; color: var(--ink-soft); margin-bottom: 0.8rem; }
-.speaker .btn { padding: 0.6em 1.1em; }
+
+/* Take action: one thing to do after the talk, from the action fields in
+   the talk's file. A wide row under the talk's text: the picture of where
+   it goes, tilted like a print, then what to do. The whole row is the link. */
+.take-action-row { padding-bottom: 2.5rem; }
+.take-action {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: center;
+  padding: 1.6rem 2.25rem;
+  background: var(--paper-sunk);
+  border-radius: 3px;
+  color: inherit;
+  text-decoration: none;
+}
+.take-action:hover { color: inherit; }
+.take-action:hover .btn { background: var(--bronze-deep); border-color: var(--bronze-deep); }
+.take-action__pic {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 9.5rem;
+  max-width: 16rem;
+  transform: rotate(-2deg);
+  box-shadow: 0 0.9rem 1.6rem rgba(20, 41, 12, 0.28);
+  margin-block: -2.5rem;
+}
+.take-action__text { display: block; max-width: 38rem; }
+.take-action__text > span { display: block; }
+.take-action__do {
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  line-height: 1.02;
+  margin-top: 0.35rem;
+}
+.take-action__why { font-size: 0.9375rem; color: var(--ink-soft); margin: 0.5rem 0 1rem; }
+.take-action .btn { display: inline-block !important; }
+@media (max-width: 40rem) {
+  .take-action { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; padding: 1.4rem; }
+  .take-action__pic { margin: -2.5rem auto 0; max-height: 8rem; }
+}
 
 /* The flip-through lines up with the text above it. On a short screen it narrows,
    so its buttons still fit with the slide. Every deck gets the same 16:9 frame,
    and other shapes sit centred inside it. */
 .flip { background: var(--ink); padding-block: 2rem; margin-bottom: var(--bay); }
+/* "Slides" over the viewer or the countdown frame, in the same small capitals
+   as "Take action", so the slides read as their own section below the box. */
+.slides-label { margin: 0 0 0.75rem; }
+.flip .slides-label { color: var(--glow); }
 .flip__stage { max-width: calc((100svh - 9rem) * 16 / 9); }
 .flip__frame {
   position: relative;

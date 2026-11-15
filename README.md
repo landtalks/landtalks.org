@@ -71,8 +71,38 @@ talk once it's live. Talks within an evening are listed in running order,
 from an `order` field (`order: 1` for the first talk, and so on), or
 alphabetically by filename for evenings without one.
 
-Optional fields: `order`, `bio`, `photo` (a file in `images/speakers/`), `action_text`
-and `action_url`.
+Optional fields: `order`, `bio`, `photo` (a file in `images/speakers/`), and
+the Take action fields below.
+
+## Take action
+
+A talk can end with one thing for people to do next: read a report, join
+something, try a tool. It shows as a wide shaded row under the talk's text,
+labelled "Take action", with a picture of where it goes. The whole row is the
+link. A talk without an `action` shows nothing.
+
+All of it is set in the talk's own file, alongside its title and hook:
+
+```markdown
+action: "Read Beth's report"
+action_text: "Taking back control of rents, for UCL's Institute for Innovation and Public Purpose: the HMRC numbers behind this talk."
+action_button: "Read the report"
+action_url: https://www.ucl.ac.uk/bartlett/publications/2026/jul/taking-back-control-rents
+action_image: "8-beth.jpg"
+```
+
+| Field | What it is |
+|---|---|
+| `action` | What to do, starting with a verb. Shown as the heading. |
+| `action_url` | Where it goes. Needed whenever there's an `action`. |
+| `action_text` | One or two sentences on what it is. Optional. |
+| `action_button` | The button's words. Optional; "Find out more" if left out. |
+| `action_image` | A picture of where it goes, in `images/actions/`, named `<evening>-<name>.jpg`: a report's cover, a photo, a screenshot of the site. Optional. |
+
+Keep the link to something that stays current, such as an organisation's
+event calendar rather than one event, since the page won't be updated often.
+The build stops if an `action` has no `action_url`, or if `action_image` names
+a file that isn't in `images/actions/`.
 
 ## A new evening, before and after
 
