@@ -6,13 +6,19 @@
 
 /* ------------------------------------------------------------
    SEASON — the only thing that changes between seasons.
-   Drop the new artwork into images/ and update these two paths.
+   Each season's artwork is images/season-<n>.jpg, with a squarer crop
+   as images/season-<n>-square.jpg. Keep earlier seasons' files: talk
+   pages may later show the artwork of their own season. Add the new
+   season's pair, then update these two paths and og:image in
+   _layouts/default.html. Season 1 was the golden clifftop with
+   circuitry; season 2, from evening 8, is the painted sunset over the
+   river and London.
    Wide art is used everywhere except narrow screens, which crop
    badly, so a squarer crop is used there instead.
    ------------------------------------------------------------ */
 :root {
-  --season-art: url("images/season-artwork.jpg");
-  --season-art-narrow: url("images/season-artwork-square.jpg");
+  --season-art: url("images/season-2.jpg");
+  --season-art-narrow: url("images/season-2-square.jpg");
 }
 
 /* ---------- tokens ---------- */
@@ -283,7 +289,7 @@ p:last-child { margin-bottom: 0; }
 .next .btn { width: 100%; text-align: center; }
 
 /* ---------- signature: the lit trace ----------
-   The season artwork threads glowing gold circuitry through fields,
+   Season 1's artwork threaded glowing gold circuitry through fields,
    cliffs and city. The same trace is used here to join the sections. */
 .trace {
   display: block;

@@ -12,6 +12,7 @@ understands only the parts of it they use, and stops on anything else.
 """
 
 import functools
+import hashlib
 import html
 import http.server
 import re
@@ -253,6 +254,22 @@ def published(path):
     return path.is_file() and parts[0] not in NOT_PUBLISHED and not any(part.startswith(("_", ".")) for part in parts)
 
 
+VERSIONED = {"style": "style.css", "flip": "assets/flip.js"}
+
+
+def fingerprint(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:10]
+
+
+class NoCacheHandler(http.server.SimpleHTTPRequestHandler):
+    """The preview server: tells the browser never to cache, so a re-run
+    always shows what was just built."""
+
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-store")
+        super().end_headers()
+
+
 def write(url, text):
     target = OUT / url.strip("/") / "index.html"
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -280,6 +297,10 @@ def build():
         "url": "https://landtalks.org",
         "talks": all_talks,
         "data": data,
+        # Added to the stylesheet's and viewer's addresses (?v=...), so a
+        # changed file has a new address and browsers fetch it rather than
+        # use a cached copy (GitHub Pages lets them cache for 10 minutes).
+        "version": {name: fingerprint(ROOT / path) for name, path in VERSIONED.items()},
         "static_files": [{"path": "/" + path.relative_to(ROOT).as_posix()} for path in static],
     }
     for talk in all_talks:
@@ -301,7 +322,7 @@ def build():
 if __name__ == "__main__":
     build()
     if "--serve" in sys.argv:
-        handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(OUT))
+        handler = functools.partial(NoCacheHandler, directory=str(OUT))
         print(f"Preview at http://localhost:{PORT}/ (Ctrl-C to stop). Run this again after editing.")
         try:
             http.server.ThreadingHTTPServer(("127.0.0.1", PORT), handler).serve_forever()
