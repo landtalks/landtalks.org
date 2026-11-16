@@ -16,6 +16,12 @@ let doc;
 let current = 1;
 let task = null;
 
+// Before an evening the viewer waits hidden: start (and fetch the PDF) only
+// when the countdown on the page reaches the start and shows it.
+if (root.closest('[hidden]')) {
+  await new Promise((resolve) => addEventListener('slides-open', resolve, { once: true }));
+}
+
 status.textContent = 'Loading slides…';
 
 async function draw(number) {

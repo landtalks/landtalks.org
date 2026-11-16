@@ -652,6 +652,8 @@ p:last-child { margin-bottom: 0; }
 }
 .copy { margin-top: 1rem; max-width: var(--measure); }
 .actions { margin-top: 1.75rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+/* Slides that are here before their evening wait hidden until it starts. */
+.actions [hidden] { display: none; }
 .speaker {
   display: flex;
   gap: 1.25rem;

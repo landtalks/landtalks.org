@@ -14,7 +14,7 @@ layout: default
     <div>
       <p class="hook">{{ page.hook | escape }}</p>
       <div class="copy">{{ content }}</div>
-      {% if found or page.action %}<div class="actions">{% if found %}<a class="btn" href="{{ pdf }}">Download slides (PDF)</a>{% endif %}{% if page.action %}<a class="btn btn--quiet" href="#take-action">Take action &darr;</a>{% endif %}</div>{% endif %}
+      {% if found or page.action %}<div class="actions">{% if found %}<a class="btn" href="{{ pdf }}"{% if evening.starts %} data-after-start hidden{% endif %}>Download slides (PDF)</a>{% endif %}{% if page.action %}<a class="btn btn--quiet" href="#take-action">Take action &darr;</a>{% endif %}</div>{% endif %}
       {% if page.bio or page.photo %}
       <aside class="speaker">
         {% if page.photo %}<img class="speaker__photo" src="/images/speakers/{{ page.photo }}" width="88" height="88" alt="">{% endif %}
@@ -25,21 +25,12 @@ layout: default
       {% endif %}
     </div>
   </div>
-  {% if found %}
-  <div class="flip">
-    <div class="wrap">
-      <p class="eyebrow slides-label">Slides</p>
-      <div class="flip__stage" id="flip" data-pdf="{{ pdf }}">
-        <div class="flip__frame"><canvas aria-label="Slides"></canvas><a class="flip__status" href="{{ pdf }}">Download the slides (PDF)</a></div>
-        <div class="flip__controls"><button type="button" data-go="-1" disabled>&larr; Previous</button><span aria-live="polite"></span><button type="button" data-go="1" disabled>Next &rarr;</button></div>
-      </div>
-    </div>
-  </div>
-  <script type="module" src="/assets/flip.js?v={{ site.version.flip }}"></script>
-  {% else %}{% if evening.starts %}
+  {% if evening.starts %}
   <!-- Before an evening: a countdown frame where the slides will go. Permanent:
        an evening's `day` and `starts` in _data/evenings.yml switch it on and
-       off, so keep this when an evening is over. See README.md. -->
+       off, so keep this when an evening is over. If the talk's PDF is already
+       here, the slides and download link wait, hidden, and the script below
+       swaps them in at the start time. See README.md. -->
   <div class="soon">
     <div class="wrap">
       <p class="eyebrow slides-label">Slides</p>
@@ -61,6 +52,14 @@ layout: default
       function tick() {
         var s = Math.floor((starts - Date.now()) / 1000);
         if (s <= 0) {
+          var waiting = document.querySelectorAll('[data-after-start]');
+          if (waiting.length) {
+            // The slides are here already: show them in place of the countdown.
+            box.closest('.soon').hidden = true;
+            for (var i = 0; i < waiting.length; i++) waiting[i].hidden = false;
+            dispatchEvent(new Event('slides-open'));
+            return;
+          }
           left.hidden = true;
           box.querySelector('.soon__tickets').hidden = true;
           box.querySelector('.soon__line').textContent = 'The talks are on now. The slides will be here afterwards.';
@@ -72,10 +71,24 @@ layout: default
         left.hidden = false;
         setTimeout(tick, 1000 - (Date.now() % 1000));
       }
-      tick();
+      // Once the whole page is read, so the slide viewer below is there to show.
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tick);
+      else tick();
     })();
   </script>
-  {% endif %}{% endif %}
+  {% endif %}
+  {% if found %}
+  <div class="flip"{% if evening.starts %} data-after-start hidden{% endif %}>
+    <div class="wrap">
+      <p class="eyebrow slides-label">Slides</p>
+      <div class="flip__stage" id="flip" data-pdf="{{ pdf }}">
+        <div class="flip__frame"><canvas aria-label="Slides"></canvas><a class="flip__status" href="{{ pdf }}">Download the slides (PDF)</a></div>
+        <div class="flip__controls"><button type="button" data-go="-1" disabled>&larr; Previous</button><span aria-live="polite"></span><button type="button" data-go="1" disabled>Next &rarr;</button></div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/assets/flip.js?v={{ site.version.flip }}"></script>
+  {% endif %}
   {% if page.action %}
   <!-- Take action: one thing to do after the talk, set by the action fields
        in the talk's own file in _talks/. After the slides, with a button at the

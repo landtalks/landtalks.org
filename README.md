@@ -152,6 +152,15 @@ the slides are added. Add them soon after the evening.
 The build's last line, "No PDF yet for: ...", lists the talks still waiting
 for slides.
 
+**Slides in early:** the PDFs can go in before the evening, while `starts` is
+still set. The page keeps the countdown, with the slide viewer and download
+link hidden (the browser doesn't fetch the PDF), and swaps them in by itself
+at the start time, with no push. The PDF's address is still in the page, and
+anyone who guesses it can open it, so this hides the slides rather than
+keeping them secret. Take `day` and `starts` out afterwards as usual, so the
+slides are plain on the page for search engines and anyone without
+JavaScript.
+
 The countdown is a permanent part of the site, used for every evening. It is
 turned on and off only by `day` and `starts` in `_data/evenings.yml`. Never
 delete its code, in `_layouts/talk.html` (the `soon` block and its script)
